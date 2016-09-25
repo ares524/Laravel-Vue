@@ -101,9 +101,8 @@ class AuthController extends Controller
         return redirect()->intended($this->redirectPath());
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        dd($request->all());
         Auth::logout();
         return redirect('auth/login');
     }

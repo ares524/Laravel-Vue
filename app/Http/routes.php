@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function(){
         Illuminate\Support\Facades\Redis::publish('rooms', json_encode(['room' => 'default_room']));
         return view('welcome');
     });
-    Route::post('auth/logout', 'Auth\AuthController@logout');
+
     resource('messages', 'MessagesController');
     resource('rooms', 'RoomsController');
     post('users/set_room', 'UsersController@setRoom');
