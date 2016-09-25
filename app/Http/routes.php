@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::group(['middleware' => 'auth'], function(){
 
     Route::get('test', 'TestController@test');
@@ -23,12 +22,14 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
 
+
     resource('messages', 'MessagesController');
     resource('rooms', 'RoomsController');
     post('users/set_room', 'UsersController@setRoom');
     get('users/get_user', 'UsersController@getUser');
 });
-
+Route::get('auth/register', function () { return View('auth.registers'); });
+Route::post('auth/register', 'Auth\RegisterController@create');
 Route::controller('auth', 'Auth\AuthController');
 
 

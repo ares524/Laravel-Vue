@@ -24,6 +24,12 @@
 <div style="padding-top: 10%;"></div>
 <div class="container-fluid">
     <div class="row">
+        @if (session('success'))
+            <div class="flash-message">
+                <div class="alert alert-success">
+                </div>
+            </div>
+        @endif
         @include('errors/validation')
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

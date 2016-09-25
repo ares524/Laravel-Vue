@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Response;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -26,6 +27,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $redirectTo = '/';
     /**
      * Create a new authentication controller instance.
      *
@@ -47,6 +49,11 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
+            'address' => 'required|max:255',
+            'age' => 'required|max:255',
+            'weight' => 'required|max:255',
+            'height' => 'required|max:255',
+            'hair_colour' => 'required|max:255',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -59,9 +66,15 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $date = date("Y-m-d", strtotime($data['age']));
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'address' => $data['address'],
+            'age' => $date,
+            'weight' => $data['weight'],
+            'height' => $data['height'],
+            'hair_colour' => $data['hair_colour'],
             'password' => bcrypt($data['password']),
         ]);
     }
