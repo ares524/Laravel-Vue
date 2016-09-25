@@ -18,8 +18,8 @@ class OnlyForAdmin
     {
         if(Auth::user()->isAdmin()) return $next($request);
 
-        if($request->ajax()) return response('Только для админа', 401);
+        if($request->ajax()) return response('Only the administrator', 401);
 
-        return redirect()->back()->withErrors('У вас не достаточно прав для совершения этого действия');
+        return redirect()->back()->withErrors('You are not allowed to perform this action');
     }
 }

@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
     /**
      * Create a new authentication controller instance.
      *
@@ -101,5 +101,10 @@ class AuthController extends Controller
         return redirect()->intended($this->redirectPath());
     }
 
-
+    public function logout(Request $request)
+    {
+        dd($request->all());
+        Auth::logout();
+        return redirect('auth/login');
+    }
 }
