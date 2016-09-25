@@ -11843,7 +11843,7 @@ new Vue({
             if (this.newMessage == "") return;
             var that = this;
 
-            $.post('/messages', { _token: this.token, room_id: this.room, message: this.newMessage }).done(function () {
+            $.post('/messages', { _token: this.token, room_id: this.room, message: this.newMessage, timestamp: that.nowtime()}).done(function () {
                 that.newMessage = "";
             });
         },
@@ -11979,7 +11979,20 @@ new Vue({
                 socket.emit('createRoom', room);
                 that.$els.room.value = '';
             });
-        }
+        },
+      nowtime: function (masa) {
+          var date = new Date(masa);
+          var hours = date.getHours();
+          var minutes = date.getMinutes();
+          var ampm = hours >= 12 ? 'pm' : 'am';
+
+          hours = hours % 12;
+          hours = hours ? hours : 12; // the hour '0' should be '12'
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+
+          var strTime = hours + ':' + minutes + ' ' + ampm;
+          return strTime;
+      },
 
     }
 

@@ -4,8 +4,9 @@
 <div class="container-fluid">
     <div class="row">
         @if (session('success'))
-            <div class="flash-message">
-                <div class="alert alert-success">You have been successfully Register!</div>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Successful Register!</strong> Please Login.
             </div>
         @endif
         @include('errors/validation')
