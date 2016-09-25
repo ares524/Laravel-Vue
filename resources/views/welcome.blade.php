@@ -15,114 +15,98 @@
 
     <div class="container-fluid" id="chat">
 
-        <header class="row">
-            <div class="col-xs-9">
-                <h1>LaraChat</h1>
-            </div>
-            <div class="col-xs-3">
-                <br>
-                <span>Welcome, <b>{{ Auth::user()->name }}</b></span>
-                <a href="/auth/logout" class="pull-right"><i class="fa fa-power-off"></i> Logout</a>
-            </div>
-        </header>
-
         <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-9">
-            <div class="input-group">
-                <input v-model="mesej" type="text" class="form-control" placeholder="search..." />
-            
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
-                                  <div class="form-group">
-                                    <label for="filter">Filter by</label>
-                                    <select class="form-control">
-                                        <option value="0" selected>All Snippets</option>
-                                        <option value="1">Featured</option>
-                                        <option value="2">Most popular</option>
-                                        <option value="3">Top rated</option>
-                                        <option value="4">Most commented</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Author</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Contains the words</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <button type="submit" class="btn btn-primary"><span aria-hidden="true">Search</span></button>
-                                </form>
+        <div class="col-md-1"></div>
+
+        <div class="col-md-7">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <b>LaraChat</b>
+            </div>
+
+		    <div class="input-group">
+                <input type="hidden" name="search_param" value="all" id="search_param">         
+                <input v-model="mesej" type="text" class="form-control" name="x" placeholder="Search term...">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">Filter by</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#contains">Contains</a></li>
+                      <li><a href="#its_equal">It's equal</a></li>
+                      <li><a href="#greather_than">Greather than ></a></li>
+                      <li><a href="#less_than">Less than < </a></li>
+                      <li class="divider"></li>
+                      <li><a href="#all">Anything</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body" style="height:365px;overflow-y: auto;">
+            	@include('partials.admin_controls.privacy_switcher')
+					<ul class="media-list">
+                        <li class="media">
+                            <div class="media-body messages" v-el:msgs>
+                                <div class="media" v-for="msg in messages | orderBy 'id' | filterBy mesej">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle " src="https://image.winudf.com/1119/027c14dd48004c8a/icon=30x.png">
+                                    </a>
+                                    <div class="media-body" v-bind:class="messageClass(msg)">
+                                        <a href="javascript:void(0)" v-on:click="answer(msg)">
+		                                    @{{ msg.author.name }}:
+		                                </a>
+		                                <span>@{{ msg.message }}</span> @include('partials.admin_controls.delete_msg_btn')
+                                        <br>
+                                       <small class="text-muted">Alex Deo | 23rd June at 5:00pm</small>
+                                        <hr>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <button type="button" class="btn btn-primary"><span aria-hidden="true">Search</span></button>
-                    </div>
+                        </li>
+                    </ul>
+            </div>
+            <div class="panel-footer">
+            	<div class="input-group _msg">
+                    <input type="text" class="form-control" placeholder="Enter Message" v-model="newMessage" v-on:keydown.enter="sendMessage($event)" v-el:input>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="button" v-on:click="sendMessage($event)">SEND</button>
+                    </span>
                 </div>
             </div>
         </div>
+    	</div>
+
+    	<div class="col-md-3">
+	          <div class="panel panel-primary">
+	            <div class="panel-heading">
+	               ROOM
+	            </div>
+	            <div class="panel-body" style="height:455px;overflow-y: auto;">
+	            @include('partials.admin_controls.create_room_btn')
+	                <ul class="media-list" id="rooms">
+	                    <li class="media" v-for="_room in rooms">
+	                        <div class="media-body">
+	                            <div class="media">
+	                                <a class="pull-left" href="javascript:void(0)" v-bind:class="{'active' : _room.id == room}" v-on:click="changeRoom(_room.id)">
+	                                	<img class="media-object img-circle" style="max-height:40px;" src="http://www.aanem.org/App_Themes/AanemNew/images/users.png">
+	                                </a>
+	                                @include('partials.admin_controls.remove_room_btn')
+	                                <div class="media-body">
+	                                    <h5><a href="javascript:void(0)" v-bind:class="{'active' : _room.id == room}" v-on:click="changeRoom(_room.id)">
+                            			@{{ _room.title }}
+                            			</a></h5>
+	                                   <small class="text-muted">Active From 3 hours</small>
+	                                </div>
+	                            </div>
+
+	                        </div>
+	                    </li>
+	                </ul>
+	                </div>
+	            </div>
+	    </div>
         </div>
-        <br>
-
-        <div class="row">
-            <div class="col-sm-3">
-
-                @include('partials.admin_controls.create_room_btn')
-
-                <ul class="list-group" id="rooms">
-                    <li class="list-group-item" v-for="_room in rooms">
-                        <a href="javascript:void(0)"
-                           v-bind:class="{'active' : _room.id == room}"
-                           v-on:click="changeRoom(_room.id)">
-                            @{{ _room.title }}
-                        </a>
-
-                    @include('partials.admin_controls.remove_room_btn')
-
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-sm-9">
-
-               @include('partials.admin_controls.privacy_switcher')
-
-                <div>
-                    <div class="panel panel-default messages" v-el:msgs>
-                        <div v-for="msg in messages | orderBy 'id' | filterBy mesej">
-                            <p class="message" v-bind:class="messageClass(msg)">
-                                <a href="javascript:void(0)" v-on:click="answer(msg)">
-                                    @{{ msg.author.name }}:
-                                </a>
-                                <span>@{{ msg.message }}</span>
-
-                                @include('partials.admin_controls.delete_msg_btn')
-
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="input-group _msg">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Message"
-                           v-model="newMessage"
-                           v-on:keydown.enter="sendMessage($event)"
-                           v-el:input
-                        >
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" v-on:click="sendMessage($event)">Send</button>
-                      </span>
-                    </div><!-- /input-group -->
-
-                </div>
-            </div>
-        </div>
-
+       
 
         <div class="notifications">
             <div class="alert alert-success fade in" role="alert" v-for="noteMsg in notifications ">
