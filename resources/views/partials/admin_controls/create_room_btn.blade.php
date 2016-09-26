@@ -1,4 +1,4 @@
-@if(Auth::user()->isAdmin())
+{{--@if(Auth::user()->isAdmin())--}}
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -7,4 +7,4 @@
     <br>
     <br>
 
-@endif
+{{--@endif--}}

@@ -11819,6 +11819,11 @@ new Vue({
     data: {
         messages: [],
         mesej: '',
+        all: '',
+        age: '',
+        weight: '',
+        height: '',
+        hair_colour: '',
         saved: [],
         newMessage: "",
         token: document.querySelector('meta[role=token]').content,

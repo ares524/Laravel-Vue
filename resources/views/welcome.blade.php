@@ -18,10 +18,6 @@
                                 <span id="search_concept">Filter by</span> <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#contains">Contains</a></li>
-                                <li><a href="#its_equal">It's equal</a></li>
-                                <li><a href="#greather_than">Greather than ></a></li>
-                                <li><a href="#less_than">Less than < </a></li>
                                 <li class="divider"></li>
                                 <li><a href="#all">Anything</a></li>
                             </ul>
@@ -33,16 +29,16 @@
                         <ul class="media-list">
                             <li class="media">
                                 <div class="media-body messages" v-el:msgs>
-                                    <div class="media" v-for="msg in messages | orderBy 'id' | filterBy mesej">
+                                    <div class="media message" v-for="msg in messages | orderBy 'id' | filterBy mesej">
                                         <a class="pull-left" href="#">
-                                            <img class="media-object img-circle "
-                                                 src="https://image.winudf.com/1119/027c14dd48004c8a/icon=30x.png">
+                                            <img class="media-object img-circle " src="https://image.winudf.com/1119/027c14dd48004c8a/icon=30x.png">
                                         </a>
+                                        @include('partials.admin_controls.delete_msg_btn')
                                         <div class="media-body" v-bind:class="messageClass(msg)">
                                             <a href="javascript:void(0)" v-on:click="answer(msg)">
                                                 @{{ msg.author.name }}:
                                             </a>
-                                            <span>@{{ msg.message }}</span> @include('partials.admin_controls.delete_msg_btn')
+                                            <span>@{{ msg.message }}</span>
                                             <br>
                                             <small class="text-muted">@{{ nowtime(msg.created_at) }}</small>
                                             <hr>
@@ -88,7 +84,7 @@
                                                    v-on:click="changeRoom(_room.id)">
                                                     @{{ _room.title }}
                                                 </a></h5>
-                                            <small class="text-muted">Active From 3 hours</small>
+                                            <small class="text-muted">Active From @{{  nowtime(_room.created_at) }}</small>
                                         </div>
                                     </div>
 

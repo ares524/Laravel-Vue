@@ -1,4 +1,4 @@
-@if(Auth::user()->isAdmin())
+{{--@if(Auth::user()->isAdmin())--}}
 
     <a href="javascript:void(0)" v-on:click="showPrivate()" v-show="!showPrivateMessages">
         <i class="fa fa-eye text-success"></i>
@@ -9,4 +9,4 @@
         Hide private messages
     </a>
 
-@endif
+{{--@endif--}}
