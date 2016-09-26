@@ -23,10 +23,10 @@ Route::group(['middleware' => 'auth'], function(){
         return view('welcome');
     });
 
-    resource('messages', 'MessagesController');
-    resource('rooms', 'RoomsController');
-    post('users/set_room', 'UsersController@setRoom');
-    get('users/get_user', 'UsersController@getUser');
+    Route::resource('messages', 'MessagesController');
+    Route::resource('rooms', 'RoomsController');
+    Route::post('users/set_room', 'UsersController@setRoom');
+    Route::get('users/get_user', 'UsersController@getUser');
 });
 Route::get('auth/register', function () { return View('auth.registers'); });
 Route::post('auth/register', 'Auth\RegisterController@create');
