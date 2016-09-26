@@ -16,7 +16,7 @@ class OnlyForAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->isAdmin()) return $next($request);
+        if(Auth::user()) return $next($request);
 
         if($request->ajax()) return response('Only the administrator', 401);
 
