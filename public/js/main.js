@@ -11834,7 +11834,7 @@ new Vue({
         closeTriggers: document.querySelectorAll('.fout'),
         showPrivateMessages: 0
     },
-
+    
     ready: function ready() {
         this.loadMessages();
         this.initListener();
@@ -11997,6 +11997,13 @@ new Vue({
 
           var strTime = hours + ':' + minutes + ' ' + ampm;
           return strTime;
+      },
+      ageNow: function (masa) {
+          
+          var date = new Date(masa);
+          var today = new Date();
+          var age = today.getFullYear() - date.getFullYear();
+          return age;
       },
 
     }

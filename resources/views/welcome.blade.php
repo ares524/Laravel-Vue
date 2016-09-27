@@ -10,7 +10,7 @@
                         <b>LaraChat</b>
                     </div>
 
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                         <input type="hidden" name="search_param" value="all" id="search_param">
                         <input v-model="mesej" type="text" class="form-control" name="x" placeholder="Search term...">
                         <div class="input-group-btn search-panel">
@@ -18,12 +18,78 @@
                                 <span id="search_concept">Filter by</span> <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
+                                li><a>Age</a></li>
+                                <ul>
+                                    <li style="list-style-type:disc;"><a v-model="age" href="#" > < 18</a></li>
+                                    <li style="list-style-type:disc;"><a v-model="age" href="#">18 - 24</a></li>
+                                    <li style="list-style-type:disc;"><a v-model="age" href="#">25 - 39</a></li>
+                                    <li style="list-style-type:disc;"><a v-model="age" href="#">40 > </a></li>
+                                </ul>
+                               
                                 <li class="divider"></li>
                                 <li><a href="#all">Anything</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
+                    <div class="input-group" id="adv-search" style="width:100%">
+                        <input type="text" class="form-control" placeholder="Search for snippets" />
+                        <div class="input-group-btn">
+                            <div class="btn-group" role="group">
+                                <div class="dropdown dropdown-lg">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <form class="form-horizontal" role="form">
+                                          <div class="form-group">
+                                            <div class="col-md-4">
+                                                <fieldset>
+                                                    <p><b>FilterBy Seen</b></p>
+                                                    <div class="checkbox">
+                                                        <input id="checkbox1" type="checkbox" checked="">
+                                                        <label for="checkbox1">
+                                                            Today
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox checkbox-primary">
+                                                        <input id="checkbox2" type="checkbox" >
+                                                        <label for="checkbox2">
+                                                            This Week
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox checkbox-success">
+                                                        <input id="checkbox3" type="checkbox">
+                                                        <label for="checkbox3">
+                                                            Last Week
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input id="checkbox4" type="checkbox">
+                                                        <label for="checkbox4">
+                                                            This Month
+                                                        </label>
+                                                    </div>
+                                                    <br>
+                                                    <p><b>FilterBy Photo</b></p>
+                                                    <div class="checkbox checkbox-warning checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox1" value="option1">
+                                                        <label for="inlineCheckbox1"> Show Photo </label>
+                                                    </div>
+                                                    <div class="checkbox checkbox-danger checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox2" value="option1">
+                                                        <label for="inlineCheckbox2"> Hide Photo </label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                          </div>
+                                          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="panel-body" style="height:365px;overflow-y: auto;">
                         @include('partials.admin_controls.privacy_switcher')
                         <ul class="media-list">
@@ -36,7 +102,7 @@
                                         @include('partials.admin_controls.delete_msg_btn')
                                         <div class="media-body" v-bind:class="messageClass(msg)">
                                             <a href="javascript:void(0)" v-on:click="answer(msg)">
-                                                @{{ msg.author.name }}:
+                                                @{{ msg.author.name }}
                                             </a>
                                             <span>@{{ msg.message }}</span>
                                             <br>
