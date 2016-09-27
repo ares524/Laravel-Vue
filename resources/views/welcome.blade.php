@@ -33,7 +33,8 @@
                     </div> -->
 
                     <div class="input-group" id="adv-search" style="width:100%">
-                        <input type="text" class="form-control" placeholder="Search for snippets" />
+                        <input type="hidden" name="search_param" value="all" id="search_param">
+                        <input v-model="mesej" type="text" class="form-control" placeholder="Search for snippets" />
                         <div class="input-group-btn">
                             <div class="btn-group" role="group">
                                 <div class="dropdown dropdown-lg">
