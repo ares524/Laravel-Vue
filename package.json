@@ -7,7 +7,7 @@
     "bootstrap-sass": "^3.0.0",
     "ioredis": "^1.10.0",
     "laravel-elixir": "^3.0.0",
-    "socket.io": "^1.3.7",
+    "socket.io": "^1.4.8",
     "socket.io.users": "^2.0.2",
     "underscore": "^1.8.3",
     "vue": "1.*",
