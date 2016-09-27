@@ -34,7 +34,7 @@
 
                     <div class="input-group" id="adv-search" style="width:100%">
                         <input type="hidden" name="search_param" value="all" id="search_param">
-                        <input v-model="mesej" type="text" class="form-control" placeholder="Search for snippets" />
+                        <input v-model="mesej" type="text" class="form-control" placeholder="Search..." />
                         <div class="input-group-btn">
                             <div class="btn-group" role="group">
                                 <div class="dropdown dropdown-lg">
@@ -82,11 +82,9 @@
                                                 </fieldset>
                                             </div>
                                           </div>
-                                          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                         </form>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </div>
                         </div>
                     </div>

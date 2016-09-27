@@ -5849,7 +5849,7 @@ body {
         position: static !important;
     }
     .dropdown.dropdown-lg .dropdown-menu {
-        min-width: 500px;
+        min-width: 285px;
     }
 }
 
