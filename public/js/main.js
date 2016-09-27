@@ -11813,6 +11813,7 @@ var Vue = require('vue');
 var _ = require('underscore');
 
 var socket = io('http://127.0.0.1:3000');
+// var socket = io('http://172.30.192.11:3000'); //testing socket
 
 new Vue({
     el: "#chat",
