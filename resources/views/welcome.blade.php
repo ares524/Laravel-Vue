@@ -10,28 +10,6 @@
                         <b>LaraChat</b>
                     </div>
 
-                    <!-- <div class="input-group">
-                        <input type="hidden" name="search_param" value="all" id="search_param">
-                        <input v-model="mesej" type="text" class="form-control" name="x" placeholder="Search term...">
-                        <div class="input-group-btn search-panel">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span id="search_concept">Filter by</span> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                li><a>Age</a></li>
-                                <ul>
-                                    <li style="list-style-type:disc;"><a v-model="age" href="#" > < 18</a></li>
-                                    <li style="list-style-type:disc;"><a v-model="age" href="#">18 - 24</a></li>
-                                    <li style="list-style-type:disc;"><a v-model="age" href="#">25 - 39</a></li>
-                                    <li style="list-style-type:disc;"><a v-model="age" href="#">40 > </a></li>
-                                </ul>
-                               
-                                <li class="divider"></li>
-                                <li><a href="#all">Anything</a></li>
-                            </ul>
-                        </div>
-                    </div> -->
-
                     <div class="input-group" id="adv-search" style="width:100%">
                         <input type="hidden" name="search_param" value="all" id="search_param">
                         <input v-model="mesej" type="text" class="form-control" placeholder="Search..." />
@@ -89,7 +67,7 @@
                         </div>
                     </div>
                     
-                    <div class="panel-body" style="height:365px;overflow-y: auto;">
+                    <div class="panel-body" style="height:365px;">
                         @include('partials.admin_controls.privacy_switcher')
                         <ul class="media-list">
                             <li class="media">
