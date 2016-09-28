@@ -11846,7 +11846,6 @@ var vm = new Vue({
         this.initListener();
         this.loadRooms();
         this.setUser();
-        this.seen();
     },
     computed: {
     },
