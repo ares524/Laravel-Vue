@@ -22,40 +22,28 @@
                                           <div class="form-group">
                                             <div class="col-md-4">
                                                 <fieldset>
-                                                    <p><b>FilterBy Seen</b></p>
-                                                    <div class="checkbox">
-                                                        <input id="checkbox1" type="checkbox" checked="">
-                                                        <label for="checkbox1">
-                                                            Today
-                                                        </label>
+                                                    <p><b>Filter By Seen</b></p>
+                                                    <div class="checkbox checkbox-primary">
+                                                        <input id="checkbox1" type="checkbox">
+                                                        <label for="checkbox1">Today</label>
                                                     </div>
                                                     <div class="checkbox checkbox-primary">
                                                         <input id="checkbox2" type="checkbox" >
-                                                        <label for="checkbox2">
-                                                            This Week
-                                                        </label>
+                                                        <label for="checkbox2">This Week</label>
                                                     </div>
-                                                    <div class="checkbox checkbox-success">
+                                                    <div class="checkbox checkbox-primary">
                                                         <input id="checkbox3" type="checkbox">
-                                                        <label for="checkbox3">
-                                                            Last Week
-                                                        </label>
+                                                        <label for="checkbox3">Last Week</label>
                                                     </div>
-                                                    <div class="checkbox checkbox-info">
+                                                    <div class="checkbox checkbox-primary">
                                                         <input id="checkbox4" type="checkbox">
-                                                        <label for="checkbox4">
-                                                            This Month
-                                                        </label>
+                                                        <label for="checkbox4">This Month</label>
                                                     </div>
                                                     <br>
-                                                    <p><b>FilterBy Photo</b></p>
-                                                    <div class="checkbox checkbox-warning checkbox-inline">
-                                                        <input type="checkbox" id="inlineCheckbox1" value="option1">
+                                                    <p><b>Filter By Photo</b></p>
+                                                    <div class="checkbox checkbox-primary checkbox-inline">
+                                                        <input v-model="showphoto" type="checkbox" id="inlineCheckbox1" checked>
                                                         <label for="inlineCheckbox1"> Show Photo </label>
-                                                    </div>
-                                                    <div class="checkbox checkbox-danger checkbox-inline">
-                                                        <input type="checkbox" id="inlineCheckbox2" value="option1">
-                                                        <label for="inlineCheckbox2"> Hide Photo </label>
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -68,20 +56,20 @@
                     </div>
                     
                     <div class="panel-body" style="height:365px;">
-                        @include('partials.admin_controls.privacy_switcher')
+                        {{--@include('partials.admin_controls.privacy_switcher')--}}
                         <ul class="media-list">
                             <li class="media">
                                 <div class="media-body messages" v-el:msgs>
                                     <div class="media message" v-for="msg in messages | orderBy 'id' | filterBy mesej">
                                         <a class="pull-left" href="#">
-                                            <img class="media-object img-circle " src="https://image.winudf.com/1119/027c14dd48004c8a/icon=30x.png">
+                                            <img v-if="showphoto" class="media-object img-circle " src="img/icon=30x.png">
                                         </a>
                                         @include('partials.admin_controls.delete_msg_btn')
                                         <div class="media-body" v-bind:class="messageClass(msg)">
                                             <a href="javascript:void(0)" v-on:click="answer(msg)">
                                                 @{{ msg.author.name }}
                                             </a>
-                                            <span>@{{ msg.message }}</span>
+                                            <span style="visibility: hidden">@{{ msg.message}}</span>
                                             <br>
                                             <small class="text-muted">@{{ nowtime(msg.created_at) }}</small>
                                             <hr>
@@ -105,9 +93,7 @@
 
             <div class="col-md-3">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        ROOM
-                    </div>
+                    <div class="panel-heading"></div>
                     <div class="panel-body" style="height:455px;overflow-y: auto;">
                         @include('partials.admin_controls.create_room_btn')
                         <ul class="media-list" id="rooms">
@@ -118,7 +104,7 @@
                                            v-bind:class="{'active' : _room.id == room}"
                                            v-on:click="changeRoom(_room.id)">
                                             <img class="media-object img-circle" style="max-height:40px;"
-                                                 src="http://www.aanem.org/App_Themes/AanemNew/images/users.png">
+                                                 src="img/users.png">
                                         </a>
                                         @include('partials.admin_controls.remove_room_btn')
                                         <div class="media-body">

@@ -11815,7 +11815,7 @@ var _ = require('underscore');
 var socket = io('http://127.0.0.1:3000');
 // var socket = io('http://172.30.192.11:3000'); //testing socket
 
-new Vue({
+var vm = new Vue({
     el: "#chat",
     data: {
         messages: [],
@@ -11825,6 +11825,11 @@ new Vue({
         weight: '',
         height: '',
         hair_colour: '',
+        today: '',
+        thisweek: '',
+        lastweek: '',
+        thismonth: '',
+        showphoto: true,
         saved: [],
         newMessage: "",
         token: document.querySelector('meta[role=token]').content,
@@ -11841,8 +11846,10 @@ new Vue({
         this.initListener();
         this.loadRooms();
         this.setUser();
+        this.seen();
     },
-
+    computed: {
+    },
     methods: {
         sendMessage: function sendMessage(e) {
             e.preventDefault();
@@ -11891,6 +11898,7 @@ new Vue({
             });
 
             socket.on('roomHasBeenCreated', function (room) {
+              console.log('roomHasBeenCreated'+ room);
                 that.rooms.push(room);
             });
         },
@@ -11986,37 +11994,59 @@ new Vue({
                 that.$els.room.value = '';
             });
         },
-      nowtime: function (masa) {
-          var date = new Date(masa);
-          var hours = date.getHours();
-          var minutes = date.getMinutes();
-          var ampm = hours >= 12 ? 'pm' : 'am';
+        nowtime: function (masa) {
+            var date = new Date(masa);
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var sec = date.getSeconds();
+            var ampm = hours >= 12 ? 'pm' : 'am';
 
-          hours = hours % 12;
-          hours = hours ? hours : 12; // the hour '0' should be '12'
-          minutes = minutes < 10 ? '0' + minutes : minutes;
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
 
-          var strTime = hours + ':' + minutes + ' ' + ampm;
-          return strTime;
-      },
-      ageNow: function (masa) {
-          
-          var date = new Date(masa);
-          var today = new Date();
-          var age = today.getFullYear() - date.getFullYear();
-          return age;
-      },
-      guid: function () {
-        function s4() {
-          return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
-      }
+          var strTime = hours + ':' + minutes + ':' + sec + ' ' + ampm;
+            return strTime;
+        },
+        ageNow: function (masa) {
 
+            var date = new Date(masa);
+            var today = new Date();
+            var age = today.getFullYear() - date.getFullYear();
+            return age;
+        },
+        guid: function () {
+          function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+          }
+          return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+              s4() + '-' + s4() + s4() + s4();
+        },
     }
 
 });
+
+  Vue.filter('seen', function () {
+    var today = new Date; // get current date
+
+    var today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    var thisweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+    var lastweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+    var thismonth = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+
+    if (this.today == true) {
+      return today;
+    }
+    if (this.thisweek == true) {
+      return thisweek;
+    }
+    if (this.lastweek == true) {
+      return lastWeek;
+    }
+    if (this.thismonth == true) {
+      return thismonth;
+    }
+  });
 
 },{"underscore":2,"vue":68}]},{},[70]);
 
