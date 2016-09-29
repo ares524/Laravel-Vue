@@ -69,6 +69,7 @@
                                             <a href="javascript:void(0)" v-on:click="answer(msg)">
                                                 @{{ msg.author.name }}
                                             </a>
+                                            <span>@{{ msg.message | reverse}}</span>
                                             <br>
                                             <small class="text-muted">@{{ nowtime(msg.created_at) }}</small>
                                             <hr>
@@ -92,7 +93,7 @@
 
             <div class="col-md-3">
                 <div class="panel panel-primary">
-                    <div class="panel-heading"></div>
+                    <div class="panel-heading">Friend</div>
                     <div class="panel-body" style="height:455px;overflow-y: auto;">
                         @include('partials.admin_controls.create_room_btn')
                         <ul class="media-list" id="rooms">

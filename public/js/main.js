@@ -11812,7 +11812,7 @@ module.exports = Watcher
 var Vue = require('vue');
 var _ = require('underscore');
 
-var socket = io('http://127.0.0.1:3000');
+var socket = io('http://172.30.50.51:3000');
 // var socket = io('http://172.30.192.11:3000'); //testing socket
 
 var vm = new Vue({
@@ -11825,7 +11825,7 @@ var vm = new Vue({
         weight: '',
         height: '',
         hair_colour: '',
-        today: '',
+        // today: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1),
         thisweek: '',
         lastweek: '',
         thismonth: '',
@@ -12024,6 +12024,13 @@ var vm = new Vue({
     }
 
 });
+  Vue.filter('wrap', function (value, begin) {
+    var today = new Date; // get current date
+    today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    console.log(begin);
+    // console.log(value);
+    return value;
+  });
 
   Vue.filter('seen', function () {
     var today = new Date; // get current date
