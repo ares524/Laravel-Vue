@@ -69,7 +69,7 @@
                                             <a href="javascript:void(0)" v-on:click="answer(msg)">
                                                 @{{ msg.author.name }}
                                             </a>
-                                            <span>@{{ msg.message | reverse}}</span>
+                                            <span>@{{ msg.message}}</span>
                                             <br>
                                             <small class="text-muted">@{{ nowtime(msg.created_at) }}</small>
                                             <hr>
