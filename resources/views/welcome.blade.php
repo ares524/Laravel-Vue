@@ -23,21 +23,27 @@
                                             <div class="col-md-4">
                                                 <fieldset>
                                                     <p><b>Filter By Seen</b></p>
-                                                    <div class="checkbox checkbox-primary">
-                                                        <input id="checkbox1" type="checkbox" v-model="today" v-on:click="seenBy">
-                                                        <label for="checkbox1">Today</label>
+
+                                                    <div class="filter_rad">
+                                                    <div class="radio radio-primary">
+                                                        <input id="radio1" type="radio" name="options" v-model="today" v-on:click="seenBy('today') ">
+                                                        <label for="radio1">Today</label>
                                                     </div>
-                                                    <div class="checkbox checkbox-primary">
-                                                        <input id="checkbox2" type="checkbox" v-model="thisweek" v-on:click="seenBy">
-                                                        <label for="checkbox2">This Week</label>
+
+                                                    <div class="radio radio-primary">
+                                                        <input id="radio2" type="radio" name="options" v-model="thisweek" v-on:click="seenBy('thisweek') ">
+                                                        <label for="radio2">This Week</label>
                                                     </div>
-                                                    <div class="checkbox checkbox-primary">
-                                                        <input id="checkbox3" type="checkbox" v-model="lastweek" v-on:click="seenBy">
-                                                        <label for="checkbox3">Last Week</label>
+
+                                                    <div class="radio radio-primary">
+                                                        <input id="radio3" type="radio" name="options" v-model="lastweek" v-on:click="seenBy('lastweek') ">
+                                                        <label for="radio3">Last Week</label>
                                                     </div>
-                                                    <div class="checkbox checkbox-primary">
-                                                        <input id="checkbox4" type="checkbox" v-model="thismonth" v-on:click="seenBy">
-                                                        <label for="checkbox4">This Month</label>
+
+                                                    <div class="radio radio-primary">
+                                                        <input id="radio4" type="radio" name="options" v-model="thismonth" value="thismonth" v-on:click="seenBy('thismonth') ">
+                                                        <label for="radio4">This Month</label>
+                                                    </div>
                                                     </div>
                                                     <br>
                                                     <p><b>Filter By Photo</b></p>

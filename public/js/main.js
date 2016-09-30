@@ -11846,7 +11846,6 @@ var vm = new Vue({
         this.initListener();
         this.loadRooms();
         this.setUser();
-        this.seenBy();
     },
     methods: {
         sendMessage: function sendMessage(e) {
@@ -11992,21 +11991,32 @@ var vm = new Vue({
                 that.$els.room.value = '';
             });
         },
+
         nowtime: function (masa) {
-          var date = new Date(masa);
-          var hours = date.getHours();
-          var minutes = date.getMinutes();
-          var sec = date.getSeconds();
-          var ampm = hours >= 12 ? 'pm' : 'am';
+            var date = new Date(masa);
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var sec = date.getSeconds();
 
-          hours = hours % 12;
-          hours = hours ? hours : 12; // the hour '0' should be '12'
-          minutes = minutes < 10 ? '0' + minutes : minutes;
+            if (!masa) {
+                return true;
+            }
+            var t = masa.split(/[- :]/);
 
-          var strTime = hours + ':' + minutes + ':' + sec + ' ' + ampm;
-           // console.log();
-          return strTime;
+            var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+            // console.log(t);
+            var ampm = hours >= 12 ? 'pm' : 'am';
+
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+
+            var parsedate = t[2] + "/" + t[1] + "/" + t[0];
+            var strTime = hours + ':' + minutes + ':' + sec + ' ' + ampm + ' ' + parsedate;
+            // console.log();
+            return strTime;
         },
+
         ageNow: function (masa) {
 
             var date = new Date(masa);
@@ -12014,44 +12024,52 @@ var vm = new Vue({
             var age = today.getFullYear() - date.getFullYear();
             return age;
         },
+
         guid: function () {
           function s4() {
             return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
           }
-          return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-              s4() + '-' + s4() + s4() + s4();
+          return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
         },
-        seenBy: function () {
 
-        if (this.today == false) {
-            $.post('messages/seen', {_token: this.token, seenby: this.today}).done(function (res) {
-              console.log(res);
-            });
-          }
+        seenBy: function (val) {
 
-          if (this.thisweek == false) {
-            $.post('messages/seen', {_token: this.token, seenby: this.thisweek}).done(function (res) {
-              console.log(res);
-            });
-          }
-
-          // if (this.lastweek == false) {
-          //   $('#checkbox1').prop('checked', false);
-          //   $('#checkbox2').prop('checked', false);
-          //   $('#checkbox4').prop('checked', false);
-          //   $.post('messages/seen', {_token: this.token, seenby: this.lastweek}).done(function (res) {
-          //     console.log(res);
-          //   });
-          // }
-          //
-          // if (this.thismonth == false) {
-          //   $('#checkbox1').prop('checked', false);
-          //   $('#checkbox2').prop('checked', false);
-          //   $('#checkbox3').prop('checked', false);
-          //   $.post('messages/seen', {_token: this.token, seenby: this.thismonth}).done(function (res) {
-          //     console.log(res);
-          //   });
-          // }
+            switch (val.toLowerCase()) {
+                case "today" :
+                    $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
+                        console.log(messages);
+                        this.messages = messages;
+                        // socket.emit('delete', messages);
+                        // location.reload();
+                        this.messages = 0;
+                        // that.messages.$remove(messages);
+                        // this.messages.push(messages);
+                    });
+                    break;
+                case "thisweek" :
+                    $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
+                        this.messages = 0;
+                        this.messages = messages;
+                        console.log(messages);
+                    });
+                    break;
+                case "lastweek" :
+                    $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
+                        this.messages = 0;
+                        this.messages = messages;
+                        console.log(messages);
+                    });
+                    break;
+                case "thismonth" :
+                    $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
+                        this.messages = 0;
+                        this.messages = messages;
+                        console.log(messages);
+                    });
+                    break;
+                default:
+                    return alert("opps something wrong!");
+            }
 
         }
     }

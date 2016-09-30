@@ -85,8 +85,8 @@ class MessagesController extends Controller
 
     public function filterDate(Request $request)
     {
-//        dd();
-        return response()->json($request->all());
+        $data = Message::Seen($request)->get();
+        return response()->json($data);
     }
 
 }

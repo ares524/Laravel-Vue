@@ -41,5 +41,32 @@ class Message extends Model
         $query->orderBy('id','DESC')->limit(50);
     }
 
+    public function scopeSeen($query, Request $request)
+    {
+        $seenby = $request->input('seenby');
+
+        $curr  = date("Y-m-d", strtotime("+1 day"));
+        $today  = date("Y-m-d", strtotime("now"));
+        $thisweek = date("Y-m-d", strtotime("this week"));
+        $lastweek = date("Y-m-d", strtotime("last week"));
+        $lastmonth = date("Y-m-d", strtotime("first day of last month"));
+
+        switch ($seenby) {
+            case "today": $begin = $today; break;
+            case "thisweek": $begin = $thisweek; break;
+            case "lastweek": $begin = $lastweek; break;
+            case "thismonth": $begin = $lastmonth; break;
+            default: return response()->json("something wrong!");
+        }
+
+          return $query->with('author')
+                ->where(function($query) use ($begin, $curr){
+                    $query->where('to', Auth::user()->id)
+                        ->orWhere('user_id', Auth::user()->id)
+                        ->orWhere('to', 0)
+                        ->whereBetween('created_at', [$begin, $curr]);
+                })
+                ->latest();
+    }
 
 }
