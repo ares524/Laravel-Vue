@@ -6027,7 +6027,16 @@ body {
   border-color: #5cb85c; }
 .radio-success input[type="radio"]:checked + label::after {
   background-color: #5cb85c; }
-
+.staggered-transition {
+  transition: all .5s ease-in-out;
+  overflow: hidden;
+  margin: 0;
+  height: 18%;
+}
+.staggered-enter, .staggered-leave {
+  opacity: 0;
+  height: 0;
+}
 /*============================================================*/
 
 /*# sourceMappingURL=app.css.map */

@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
     Route::resource('messages', 'MessagesController');
+    Route::post('messages/seen', 'MessagesController@filterDate');
     Route::resource('rooms', 'RoomsController');
     Route::post('users/set_room', 'UsersController@setRoom');
     Route::get('users/get_user', 'UsersController@getUser');

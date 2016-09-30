@@ -24,19 +24,19 @@
                                                 <fieldset>
                                                     <p><b>Filter By Seen</b></p>
                                                     <div class="checkbox checkbox-primary">
-                                                        <input id="checkbox1" type="checkbox">
+                                                        <input id="checkbox1" type="checkbox" v-model="today" v-on:click="seenBy">
                                                         <label for="checkbox1">Today</label>
                                                     </div>
                                                     <div class="checkbox checkbox-primary">
-                                                        <input id="checkbox2" type="checkbox" >
+                                                        <input id="checkbox2" type="checkbox" v-model="thisweek" v-on:click="seenBy">
                                                         <label for="checkbox2">This Week</label>
                                                     </div>
                                                     <div class="checkbox checkbox-primary">
-                                                        <input id="checkbox3" type="checkbox">
+                                                        <input id="checkbox3" type="checkbox" v-model="lastweek" v-on:click="seenBy">
                                                         <label for="checkbox3">Last Week</label>
                                                     </div>
                                                     <div class="checkbox checkbox-primary">
-                                                        <input id="checkbox4" type="checkbox">
+                                                        <input id="checkbox4" type="checkbox" v-model="thismonth" v-on:click="seenBy">
                                                         <label for="checkbox4">This Month</label>
                                                     </div>
                                                     <br>
@@ -60,7 +60,7 @@
                         <ul class="media-list">
                             <li class="media">
                                 <div class="media-body messages" v-el:msgs>
-                                    <div class="media message" v-for="msg in messages | orderBy 'id' | filterBy mesej">
+                                    <div class="media message" v-for="msg in messages | orderBy 'id' | filterBy mesej" transition="staggered" stagger="100">
                                         <a class="pull-left" href="#">
                                             <img v-if="showphoto" class="media-object img-circle " src="img/icon=30x.png">
                                         </a>

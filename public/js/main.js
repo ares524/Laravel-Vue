@@ -11819,16 +11819,16 @@ var vm = new Vue({
     el: "#chat",
     data: {
         messages: [],
-        mesej: '',
-        all: '',
-        age: '',
-        weight: '',
-        height: '',
-        hair_colour: '',
-        // today: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1),
-        thisweek: '',
-        lastweek: '',
-        thismonth: '',
+        mesej: "",
+        all: "",
+        age: "",
+        weight: "",
+        height: "",
+        hair_colour: "",
+        today: "",
+        thisweek: "",
+        lastweek: "",
+        thismonth: "",
         showphoto: true,
         saved: [],
         newMessage: "",
@@ -11846,8 +11846,7 @@ var vm = new Vue({
         this.initListener();
         this.loadRooms();
         this.setUser();
-    },
-    computed: {
+        this.seenBy();
     },
     methods: {
         sendMessage: function sendMessage(e) {
@@ -11994,18 +11993,19 @@ var vm = new Vue({
             });
         },
         nowtime: function (masa) {
-            var date = new Date(masa);
-            var hours = date.getHours();
-            var minutes = date.getMinutes();
-            var sec = date.getSeconds();
-            var ampm = hours >= 12 ? 'pm' : 'am';
+          var date = new Date(masa);
+          var hours = date.getHours();
+          var minutes = date.getMinutes();
+          var sec = date.getSeconds();
+          var ampm = hours >= 12 ? 'pm' : 'am';
 
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-            minutes = minutes < 10 ? '0' + minutes : minutes;
+          hours = hours % 12;
+          hours = hours ? hours : 12; // the hour '0' should be '12'
+          minutes = minutes < 10 ? '0' + minutes : minutes;
 
           var strTime = hours + ':' + minutes + ':' + sec + ' ' + ampm;
-            return strTime;
+           // console.log();
+          return strTime;
         },
         ageNow: function (masa) {
 
@@ -12021,42 +12021,46 @@ var vm = new Vue({
           return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
               s4() + '-' + s4() + s4() + s4();
         },
+        seenBy: function () {
+
+        if (this.today == false) {
+            $.post('messages/seen', {_token: this.token, seenby: this.today}).done(function (res) {
+              console.log(res);
+            });
+          }
+
+          if (this.thisweek == false) {
+            $.post('messages/seen', {_token: this.token, seenby: this.thisweek}).done(function (res) {
+              console.log(res);
+            });
+          }
+
+          // if (this.lastweek == false) {
+          //   $('#checkbox1').prop('checked', false);
+          //   $('#checkbox2').prop('checked', false);
+          //   $('#checkbox4').prop('checked', false);
+          //   $.post('messages/seen', {_token: this.token, seenby: this.lastweek}).done(function (res) {
+          //     console.log(res);
+          //   });
+          // }
+          //
+          // if (this.thismonth == false) {
+          //   $('#checkbox1').prop('checked', false);
+          //   $('#checkbox2').prop('checked', false);
+          //   $('#checkbox3').prop('checked', false);
+          //   $.post('messages/seen', {_token: this.token, seenby: this.thismonth}).done(function (res) {
+          //     console.log(res);
+          //   });
+          // }
+
+        }
     }
 
-});
-  Vue.filter('wrap', function (value, begin) {
-    var today = new Date; // get current date
-    today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    console.log(begin);
-    // console.log(value);
-    return value;
-  });
-
-  Vue.filter('seen', function () {
-    var today = new Date; // get current date
-
-    var today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    var thisweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
-    var lastweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
-    var thismonth = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
-
-    if (this.today == true) {
-      return today;
-    }
-    if (this.thisweek == true) {
-      return thisweek;
-    }
-    if (this.lastweek == true) {
-      return lastWeek;
-    }
-    if (this.thismonth == true) {
-      return thismonth;
-    }
-  });
+})
 
 },{"underscore":2,"vue":68}]},{},[70]);
 
-$(document).ready(function(e){
+$(document).ready(function(){
 
     $('.search-panel .dropdown-menu').find('a').click(function(e) {
     e.preventDefault();

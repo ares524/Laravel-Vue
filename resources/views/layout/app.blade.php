@@ -82,6 +82,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.nicescroll.min.js"></script>
 <script src="/js/socket.io.min.js"></script>
+<script src="/js/date.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

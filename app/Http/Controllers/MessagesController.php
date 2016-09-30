@@ -82,4 +82,11 @@ class MessagesController extends Controller
 
         return $request;
     }
+
+    public function filterDate(Request $request)
+    {
+//        dd();
+        return response()->json($request->all());
+    }
+
 }
