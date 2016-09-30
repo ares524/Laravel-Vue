@@ -12038,10 +12038,9 @@ var vm = new Vue({
                 case "today" :
                     $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
                         console.log(messages);
-                        this.messages = messages;
+                        // this.messages = 0;
+                        // this.messages = messages;
                         // socket.emit('delete', messages);
-                        // location.reload();
-                        this.messages = 0;
                         // that.messages.$remove(messages);
                         // this.messages.push(messages);
                     });
