@@ -12003,7 +12003,7 @@ var vm = new Vue({
             }
             var t = masa.split(/[- :]/);
 
-            var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+            // var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
             // console.log(t);
             var ampm = hours >= 12 ? 'pm' : 'am';
 
