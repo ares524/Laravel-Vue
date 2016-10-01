@@ -12034,36 +12034,43 @@ var vm = new Vue({
 
         seenBy: function (val) {
 
+            var self = this;
+
             switch (val.toLowerCase()) {
                 case "today" :
-                    $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
-                        console.log(messages);
-                        // this.messages = 0;
-                        // this.messages = messages;
-                        // socket.emit('delete', messages);
-                        // that.messages.$remove(messages);
-                        // this.messages.push(messages);
+                    $.post('messages/seen', {_token: this.token, seenby: val}, function (messages) {
+                        Vue.nextTick(function () {
+                            self.messages = [];
+                            self.messages = messages;
+                            console.log(messages);
+                        })
                     });
                     break;
                 case "thisweek" :
                     $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
-                        this.messages = 0;
-                        this.messages = messages;
-                        console.log(messages);
+                        Vue.nextTick(function () {
+                            self.messages = [];
+                            self.messages = messages;
+                            console.log(messages);
+                        })
                     });
                     break;
                 case "lastweek" :
                     $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
-                        this.messages = 0;
-                        this.messages = messages;
-                        console.log(messages);
+                        Vue.nextTick(function () {
+                            self.messages = [];
+                            self.messages = messages;
+                            console.log(messages);
+                        })
                     });
                     break;
                 case "thismonth" :
                     $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
-                        this.messages = 0;
-                        this.messages = messages;
-                        console.log(messages);
+                        Vue.nextTick(function () {
+                            self.messages = [];
+                            self.messages = messages;
+                            console.log(messages);
+                        })
                     });
                     break;
                 default:
