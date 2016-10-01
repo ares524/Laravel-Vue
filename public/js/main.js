@@ -12039,36 +12039,36 @@ var vm = new Vue({
             switch (val.toLowerCase()) {
                 case "today" :
                     $.post('messages/seen', {_token: this.token, seenby: val}, function (messages) {
+                        self.messages = [];
+                        self.messages = messages;
                         Vue.nextTick(function () {
-                            self.messages = [];
-                            self.messages = messages;
                             console.log(messages);
                         })
                     });
                     break;
                 case "thisweek" :
                     $.post('messages/seen', {_token: this.token, seenby: val}, function (messages) {
+                        self.messages = [];
+                        self.messages = messages;
                         Vue.nextTick(function () {
-                            self.messages = [];
-                            self.messages = messages;
                             console.log(messages);
                         })
                     });
                     break;
                 case "lastweek" :
                     $.post('messages/seen', {_token: this.token, seenby: val}, function (messages) {
+                        self.messages = [];
+                        self.messages = messages;
                         Vue.nextTick(function () {
-                            self.messages = [];
-                            self.messages = messages;
                             console.log(messages);
                         })
                     });
                     break;
                 case "thismonth" :
                     $.post('messages/seen', {_token: this.token, seenby: val}, function (messages) {
+                        self.messages = [];
+                        self.messages = messages;
                         Vue.nextTick(function () {
-                            self.messages = [];
-                            self.messages = messages;
                             console.log(messages);
                         })
                     });
