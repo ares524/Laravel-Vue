@@ -12047,7 +12047,7 @@ var vm = new Vue({
                     });
                     break;
                 case "thisweek" :
-                    $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
+                    $.post('messages/seen', {_token: this.token, seenby: val}, function (messages) {
                         Vue.nextTick(function () {
                             self.messages = [];
                             self.messages = messages;
@@ -12056,7 +12056,7 @@ var vm = new Vue({
                     });
                     break;
                 case "lastweek" :
-                    $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
+                    $.post('messages/seen', {_token: this.token, seenby: val}, function (messages) {
                         Vue.nextTick(function () {
                             self.messages = [];
                             self.messages = messages;
@@ -12065,7 +12065,7 @@ var vm = new Vue({
                     });
                     break;
                 case "thismonth" :
-                    $.post('messages/seen', {_token: this.token, seenby: val}).done(function (messages) {
+                    $.post('messages/seen', {_token: this.token, seenby: val}, function (messages) {
                         Vue.nextTick(function () {
                             self.messages = [];
                             self.messages = messages;
