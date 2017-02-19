@@ -26,3 +26,26 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
+### Instruction
+
+~ cd to app <br>
+
+~ composer install <br>
+~ npm install <br>
+
+~ cp .env.example .env <br>
+add your database config .env file . <br>
+~ php artisan key:generate <br>
+copy key into APP_KEY .env file <br>
+~ php artisan migrate <br>
+
+~ php artisan serve --host localhost --port 80 <br><br>
+~ node socket.js <br><br>
+
+default socket host:port 127.0.0.1:3000 <br>
+change in public/main.js | socket.js <br><br>
+
+Enjoy!
+
+
+
